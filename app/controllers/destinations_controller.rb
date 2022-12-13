@@ -49,6 +49,9 @@ class DestinationsController < ApplicationController
   end
 
   def destination_params
-    params.fetch(:destination, {})
+    params.require(:trip).permit(
+      :address,
+      :itinerary_id
+    )
   end
 end

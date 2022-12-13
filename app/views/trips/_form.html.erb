@@ -1,17 +1,16 @@
-<%= form_with(model: trip) do |form| %>
-  <% if trip.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
-
-      <ul>
-        <% trip.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+<%= form_for @trip do |form| %>
+  <%= form.label :country %><br>
+  <%= form.text_field :country %>
+  <br>
+  <%= form.fields_for :itineraries do |f| %>
+    <%= render 'itinerary_fields', f: f %>
+    <br>
+    <%= f.fields_for :destinations do |ff| %>
+      <%= render 'destination_fields', ff: ff %>
+    <% end %>
   <% end %>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <br>
+  <button type='submit'>
+    <i class="icon save"></i>&nbsp;Save
+  </button>
 <% end %>

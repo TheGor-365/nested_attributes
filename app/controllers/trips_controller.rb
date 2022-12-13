@@ -6,10 +6,18 @@ class TripsController < ApplicationController
   end
 
   def show; end
-  def edit; end
+
+  def edit
+    @trip = Trip.find(params[:id])
+  end
 
   def new
     @trip = Trip.new
+    @trip.itineraries.build
+    @itinerary = Itinerary.new
+    @trip.itineraries.each do |itinerary|
+      itinerary.destinations.build
+    end
   end
 
   def create
@@ -49,6 +57,19 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.fetch(:trip, {})
+    params.require(:trip).permit(
+      :country,
+      itineraries_attributes: [
+        :id,
+        :trip_id,
+        :village,
+        destinations_attributes: [
+          :id,
+          :itinerary_id,
+          :address,
+          :_destroy
+        ]
+      ]
+    )
   end
 end

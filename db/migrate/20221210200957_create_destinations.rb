@@ -2,7 +2,7 @@ class CreateDestinations < ActiveRecord::Migration[7.0]
   def change
     create_table :destinations do |t|
       t.string :address
-      t.belongs_to :itineraries, null: false, foreign_key: true
+      t.references :itinerary, null: false, foreign_key: true
 
       t.timestamps
     end

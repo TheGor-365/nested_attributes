@@ -10,6 +10,7 @@ class ItinerariesController < ApplicationController
 
   def new
     @itinerary = Itinerary.new
+    # @itinerary.destinations.build
   end
 
   def create
@@ -49,6 +50,9 @@ class ItinerariesController < ApplicationController
   end
 
   def itinerary_params
-    params.fetch(:itinerary, {})
+    params.require(:trip).permit(
+      :address,
+      :trip_id
+    )
   end
 end
