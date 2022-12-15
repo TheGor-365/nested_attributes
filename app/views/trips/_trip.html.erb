@@ -1,3 +1,37 @@
 <div class="border shadow rounded p-5 my-5 col-6">
-  <%= trip.country %>
+  <div class="row">
+    <div class="col-3">
+      <strong>Trip</strong>
+    </div>
+
+    <div class="col-3">
+      <%= trip.country %>
+    </div>
+  </div><hr>
+
+  <div class="row">
+    <div class="col-3">
+      <strong>Itinerary</strong>
+    </div>
+
+    <div class="col-3">
+      <% trip.itineraries.each do |itinerary| %>
+        <%= itinerary.village %>
+      <% end %>
+    </div>
+  </div><hr>
+
+  <div class="row">
+    <div class="col-3">
+      <strong>Destination</strong>
+    </div>
+
+    <div class="col-3">
+      <% trip.itineraries.each do |itinerary| %>
+        <% itinerary.destinations.each do |destination| %>
+          <%= destination.address %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
